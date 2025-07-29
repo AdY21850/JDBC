@@ -5,11 +5,13 @@ import java.sql.*;
 
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         String url = "jdbc:mysql://localhost:3306/javaconnect";
         String username = "root";
         String password = "Arigato@20";
         String querry = "select * from employee;";
+        String querry1 = "INSERT INTO employee(id,name,job,salary) values(7,'Shubhi','lovey duvey',100000);";
+        String querry2 = "DELETE from employee where id = 6;";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -19,32 +21,88 @@ public class Main {
             System.out.println(" class not found" + e.getMessage());
         }
         System.out.println("vroom vroom !!");
+        try {
+            Connection con = DriverManager.getConnection(url, username, password);
+            System.out.println("connection1 stablished succesfully !!");
+            Statement stmt1 = con.createStatement();
+            int rows_effected = stmt1.executeUpdate(querry1);
+            if (rows_effected > 0) {
+                System.out.println("data inserted !!! /n rows effeced =" + rows_effected);
+            } else {
+                System.out.println("unable to insert data");
+            }
+            stmt1.close();
+            con.close();
+            System.out.println("connection1 closed !!!!!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             Connection con = DriverManager.getConnection(url, username, password);
             System.out.println("connection stablished succesfully !!");
-            Statement stmt=con.createStatement();
-            ResultSet rs= stmt.executeQuery(querry);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(querry);
             System.out.println("==========================================");
-            System.out.println("id"+"   "+"|"+"  "+"name"+"  "+"|"+"  "+"job"+"  "+"|"+"  "+"salary");
-            while (rs.next())
-            {
-                int id=rs.getInt("id");
-                String name=rs.getString("name");
-                String job=rs.getString("job");
-                double salary=rs.getDouble("salary");
+            System.out.println("id" + "   " + "|" + "  " + "name" + "  " + "|" + "  " + "job" + "  " + "|" + "  " + "salary");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String job = rs.getString("job");
+                double salary = rs.getDouble("salary");
 
 
                 System.out.println("-------------------------------------------");
-                System.out.println(id+"   "+"|"+"  "+name+"  "+"|"+"  "+job+"  "+"|"+"  "+salary);
+                System.out.println(id + "   " + "|" + "  " + name + "  " + "|" + "  " + job + "  " + "|" + "  " + salary);
             }
             rs.close();
             stmt.close();
             con.close();
             System.out.println("connection closed !!!!!");
-
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
         }
+        try {
+                Connection con1 = DriverManager.getConnection(url, username, password);
+                System.out.println("connection2 stablished succesfully !!");
+                Statement stmt1 = con1.createStatement();
+                int rows_effected = stmt1.executeUpdate(querry2);
+                if (rows_effected > 0) {
+                    System.out.println("data deleted !!! /n rows effeced =" + rows_effected);
+                } else {
+                    System.out.println("unable to delete data");
+                }
+                stmt1.close();
+                con1.close();
+                System.out.println("connection2 closed !!!!!");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                Connection con2 = DriverManager.getConnection(url, username, password);
+                System.out.println("connection stablished succesfully !!");
+                Statement stmt2 = con2.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(querry);
+                System.out.println("==========================================");
+                System.out.println("id" + "   " + "|" + "  " + "name" + "  " + "|" + "  " + "job" + "  " + "|" + "  " + "salary");
+                while (rs2.next()) {
+                    int id = rs2.getInt("id");
+                    String name = rs2.getString("name");
+                    String job = rs2.getString("job");
+                    double salary = rs2.getDouble("salary");
+
+
+                    System.out.println("-------------------------------------------");
+                    System.out.println(id + "   " + "|" + "  " + name + "  " + "|" + "  " + job + "  " + "|" + "  " + salary);
+                }
+                rs2.close();
+                stmt2.close();
+                con2.close();
+                System.out.println("connection closed !!!!!");
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
     }
 }
