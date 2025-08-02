@@ -10,8 +10,8 @@ public class Main {
         String username = "root";
         String password = "Arigato@20";
         String querry = "select * from employee;";
-        String querry1 = "INSERT INTO employee(id,name,job,salary) values(7,'Shubhi','lovey duvey',100000);";
-        String querry2 = "DELETE from employee where id = 6;";
+        String querry1 = "INSERT INTO employee(id,name,job,salary) values(10,'Shubhya','front end dev',100000);";
+        String querry2 = "DELETE from employee where id = 8;";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -27,7 +27,7 @@ public class Main {
             Statement stmt1 = con.createStatement();
             int rows_effected = stmt1.executeUpdate(querry1);
             if (rows_effected > 0) {
-                System.out.println("data inserted !!! /n rows effeced =" + rows_effected);
+                System.out.println("data inserted !!! \nrows effeced =" + rows_effected);
             } else {
                 System.out.println("unable to insert data");
             }
@@ -68,7 +68,7 @@ public class Main {
                 Statement stmt1 = con1.createStatement();
                 int rows_effected = stmt1.executeUpdate(querry2);
                 if (rows_effected > 0) {
-                    System.out.println("data deleted !!! /n rows effeced =" + rows_effected);
+                    System.out.println("data deleted !!! \nrows effeced =" + rows_effected);
                 } else {
                     System.out.println("unable to delete data");
                 }
