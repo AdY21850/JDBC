@@ -20,7 +20,7 @@ public class AccountManager {
             try{
                 con.setAutoCommit(false);
                 if (account_number !=0){
-                    PreparedStatement ps=con.prepareStatement("SELECT * FROM accounts WHERE account_numer =? and security_pin=?");
+                    PreparedStatement ps=con.prepareStatement("SELECT * FROM accounts WHERE account_number =? and security_pin=?");
                     ps.setLong(1,account_number);
                     ps.setString(2,security_pin);
                     ResultSet resultset=ps.executeQuery();
@@ -29,7 +29,7 @@ public class AccountManager {
                         PreparedStatement ps2=con.prepareStatement(credit_query);
                         ps2.setDouble(1,ammount);
                         ps2.setLong(2,account_number);
-                        int rowsaffected=ps.executeUpdate();
+                        int rowsaffected=ps2.executeUpdate();
                         if (rowsaffected>0){
                             System.out.println("Rs."+ammount+"creditted succesfully");
                             con.commit();
@@ -55,7 +55,7 @@ public class AccountManager {
         try{
             con.setAutoCommit(false);
             if (account_number !=0){
-                PreparedStatement ps=con.prepareStatement("SELECT * FROM accounts WHERE account_numer =? and security_pin=?");
+                PreparedStatement ps=con.prepareStatement("SELECT * FROM accounts WHERE account_number =? and security_pin=?");
                 ps.setLong(1,account_number);
                 ps.setString(2,security_pin);
                 ResultSet resultset=ps.executeQuery();
@@ -66,7 +66,7 @@ public class AccountManager {
                         PreparedStatement ps2 = con.prepareStatement(debit_query);
                         ps2.setDouble(1, ammount);
                         ps2.setLong(2, account_number);
-                        int rowsaffected = ps.executeUpdate();
+                        int rowsaffected = ps2.executeUpdate();
                         if (rowsaffected > 0) {
                             System.out.println("Rs." + ammount + "debitted succesfully");
                             con.commit();
@@ -102,7 +102,7 @@ public class AccountManager {
         try{
             con.setAutoCommit(false);
             if (sender_account_number!=0 && recivers_account_number!=0){
-                PreparedStatement ps=con.prepareStatement("SELECT * FROM Account WHERE account_number = ? AND security_pin=?");
+                PreparedStatement ps=con.prepareStatement("SELECT * FROM Accounts WHERE account_number = ? AND security_pin=?");
                 ps.setLong(1,sender_account_number);
                 ps.setString(2,pin);
                 ResultSet resultset=ps.executeQuery();
@@ -151,7 +151,7 @@ public class AccountManager {
         System.out.print("Enter the Security pin");
         String pin=sc.nextLine();
         try{
-            PreparedStatement ps=con.prepareStatement("SELECT balance FROM Accouts WHERE account_number=? AND security_pin=?");
+            PreparedStatement ps=con.prepareStatement("SELECT balance FROM Accounts WHERE account_number=? AND security_pin=?");
             ps.setLong(1,account_number);
             ps.setString(2,pin);
             ResultSet resultset=ps.executeQuery();
