@@ -10,7 +10,7 @@ public class Accounts {
     }
     public long open_account(String email){
         if (!account_exist(email)){
-            String open_account_query="INSERT INTO Accounts(account_number,full_name,email,balance,security_pin) VALUES (?,?,?,?)";
+            String open_account_query="INSERT INTO Accounts(account_number,full_name,email,balance,security_pin) VALUES (?,?,?,?,?)";
             sc.nextLine();
             System.out.println("Enter full name:");
             String full_name=sc.nextLine();
@@ -55,7 +55,7 @@ public class Accounts {
     private long generateAccountNumber(){
         try{
             Statement st=con.createStatement();
-            ResultSet rs=st.executeQuery("SEKECT account_number FROM Accounts ORDER BY account_number DESC LIMIT 1");
+            ResultSet rs=st.executeQuery("SELECT account_number FROM Accounts ORDER BY account_number DESC LIMIT 1");
             if (rs.next()){
                 long last_account_number =rs.getLong("account_number");
                 return last_account_number+1;
