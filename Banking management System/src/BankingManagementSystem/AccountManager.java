@@ -82,7 +82,7 @@ public class AccountManager {
                         System.out.println("insufficient Balance");
                     }
                 }else{
-                    System.out.println("Invalid pin!");
+                    System.out.println("Invalid pin! ");
                 }
             }
         } catch (SQLException e) {
@@ -92,7 +92,7 @@ public class AccountManager {
     }
     public void transfer_money(long sender_account_number)throws SQLException{
         sc.nextLine();
-        System.out.println("Enter the recievers Accoount number: ");
+        System.out.println("Enter the recievers Accoount number->");
         long recivers_account_number=sc.nextLong();
         System.out.println("Enter Amount: ");
         double amount=sc.nextDouble();
