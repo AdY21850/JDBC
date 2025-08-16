@@ -22,9 +22,10 @@
     </dependency>
     <!-- my SQL dependency -->
     <dependency>
-        <groupId>cn.sexycode</groupId>
-        <artifactId>my-sql</artifactId>
-        <version>1.0</version>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>8.3.0</version>
     </dependency>
+
 </dependencies>
 </project>
