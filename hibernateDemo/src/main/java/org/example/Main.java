@@ -24,5 +24,7 @@ class Main{
         session.persist(emp);
 
         tx.commit();
+        session.close();
+        factory.close();
     }
 }
